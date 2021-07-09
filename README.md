@@ -6,6 +6,17 @@ In 'dbRelief' they are all reliefMap and labeled image for train u-net (suffixed
 In 'dbRelief/test/' they are reliefMap for testing u-net after training.
 
 ## DEPENDENCIES
+install tensorflow/openCV/tensorflow addon in virtual env via pip : 
+```
+sudo apt update
+sudo apt install python3-dev python3-pip python3-venv
+python3 -m venv --system-site-packages ./venv
+source ./venv/bin/activate
+pip install --upgrade pip
+pip install --upgrade tensorflow
+pip install tensorflow-addons
+pip install opencv-python
+```
 
 ## TRAIN a u-net using reliefMap
 The first step is to extract thumbnails of size 320*320 from the reliefMap. We made a bash/python script for that. Here is the command to extract the training pairs and distribute them in dbRelief/thumbnail/examples/ and dbRelief/thumbnail/labels/.
