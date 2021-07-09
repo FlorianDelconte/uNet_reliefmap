@@ -4,7 +4,6 @@ import sys
 import cv2
 import model
 import os
-import image_slicer
 
 inputFileName= sys.argv[1]
 (filename, _) = os.path.splitext(inputFileName)
