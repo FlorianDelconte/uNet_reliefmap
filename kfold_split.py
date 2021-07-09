@@ -9,7 +9,7 @@ import glob
 import cv2
 labels_suffixe="labels"
 examples_suffixe="exemples"
-data_root="../dbRelief/thumbnails/"
+data_root="dbRelief/thumbnails/"
 def lauch_data():
     #pos_path_example = os.path.join(os.getcwd(), 'db',examples_suffixe)
     #pos_examples = Path(pos_path_example).glob("*[!NEG].png")

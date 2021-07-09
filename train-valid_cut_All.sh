@@ -5,10 +5,6 @@ outputDirectoryName=$2
 
 #create valid and training dirs.
 echo "CREATE TREE DIRECTORY FOR DEEP..."
-#mkdir -p ${outputDirectoryName}/train/input/
-#mkdir -p ${outputDirectoryName}/train/output/
-#mkdir -p ${outputDirectoryName}/valid/input/
-#mkdir -p ${outputDirectoryName}/valid/output/
 
 echo "LOOP ON INPUT DIRECTORY FILES AND CUT/FILL DEEP-DIRECTORY..."
 #loop on the relief map to cut
