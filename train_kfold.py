@@ -31,7 +31,7 @@ batch_size = model.batch_size
 epochs =model.epochs
 
 #Folders crossvalidation
-save_dir        = os.path.join(os.getcwd(),'save', 'model')
+save_dir        = os.path.join(os.getcwd())
 
 input_folder    = 'input'
 label_folder    = 'output'
@@ -92,10 +92,7 @@ for k in range(len(kfolder)):
 
     except IOError:
         pass
-    ##################
-    #TRAINING + VALID#
-    ##################
-    #print("COUCOUUUUUUUUUUUUUUUUUUUUUUU")
+
 
     history=net.fit(__generators,
             steps_per_epoch   = steps_per_epoch,
@@ -104,20 +101,4 @@ for k in range(len(kfolder)):
             epochs=epochs,
             callbacks=[model_checkpoint])
     print(history.history)
-    ###############
-    #PLOT TRAINING#
-    ###############
-    '''plt.plot(history.history['precision'],'b', label='precision')
-    plt.plot(history.history['val_precision'],'b--',label = 'val_precision')
-    plt.plot(history.history['recall'],'g', label='recall')
-    plt.plot(history.history['val_recall'],'g--', label = 'val_recall')
-    plt.plot(history.history['fbeta_score'],'r', label='f1')
-    plt.plot(history.history['val_fbeta_score'],'r--', label = 'val_f1')
-    plt.plot(history.history['loss'], 'k',label='loss')
-    plt.plot(history.history['val_loss'],'k--', label = 'val_loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Measures')
-    plt.ylim([0.0, 1])
-    plt.legend(bbox_to_anchor=(0,1.02,1,0.2), loc="lower left",mode="expand", borderaxespad=0, ncol=4)
-    plt.savefig("".join([save_dir, '/', modelname+'.png']))
-    plt.clf()'''
+
