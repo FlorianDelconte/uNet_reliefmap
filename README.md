@@ -18,7 +18,7 @@ pip install tensorflow-addons
 pip install opencv-python
 ```
 
-## TRAIN a u-net using reliefMap
+## TRAIN a u-net with our DATA
 The first step is to extract thumbnails of size 320*320 from the reliefMap. We made a bash/python script for that. Here is the command to extract the training pairs and distribute them in dbRelief/thumbnail/examples/ and dbRelief/thumbnail/labels/.
 ```
 ./train-valid_cut_All.sh dbRelief/ dbRelief/thumbnails/
@@ -30,4 +30,9 @@ python3 kfold_split.py
 Finaly train the 5 models with this command :
 ```
 python3 train_kfold.py
+```
+## TEST a u-net with test DATA
+You can test visualy the training using this command :
+```
+python3 predict.py pathToReliefMapTest PathToModel treshold
 ```
