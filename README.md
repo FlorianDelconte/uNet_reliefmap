@@ -31,7 +31,7 @@ Finaly train the 5 models with this command :
 ```
 python3 train_kfold.py
 ```
-## TEST our u-net with test DATA
+## TEST u-net with test DATA
 You can test models with this command :
 ```
 python3 predict.py pathToReliefMapTest PathToModel treshold
