@@ -11,16 +11,6 @@ labels_suffixe="labels"
 examples_suffixe="exemples"
 data_root="dbRelief/thumbnails/"
 def lauch_data():
-    #pos_path_example = os.path.join(os.getcwd(), 'db',examples_suffixe)
-    #pos_examples = Path(pos_path_example).glob("*[!NEG].png")
-    #pos_path_label = os.path.join(os.getcwd(), 'db',labels_suffixe)
-    #pos_labels = Path(pos_path_label).glob("*[!NEG].png")
-
-    #neg_path_example = os.path.join(os.getcwd(), 'db',examples_suffixe)
-    #neg_examples = Path(neg_path_example).glob("*NEG.png")
-    #neg_path_label = os.path.join(os.getcwd(), 'db',labels_suffixe)
-    #neg_labels = Path(neg_path_label).glob("*NEG.png")
-
     pos_examples=[]
     pos_labels=[]
     neg_examples=[]
@@ -35,9 +25,7 @@ def lauch_data():
         neg_labels.append(name)
 
     return pos_examples,pos_labels,neg_examples,neg_labels
-    #ind_doublon=[]
-    #for im in examples:
-    #    print(im)
+
 
 def main(argv):
     print("hello world")
@@ -53,34 +41,20 @@ def main(argv):
 
     for train_index, test_index in cv.split(pos_examples):
         print(test_index)
-        #if not os.path.exists(os.getcwd()+"/db/kfold/"+"k_"+str(k)):
-        #os.mkdir(os.getcwd()+data_root+"/kfold/"+"k_"+str(k))
-        #os.mkdir(os.getcwd()+data_root+"/kfold/"+"k_"+str(k)+"/train/")
-        #os.mkdir(os.getcwd()+data_root+"/kfold/"+"k_"+str(k)+"/valid/")
         os.mkdir(os.path.join(os.getcwd(), data_root, "kfold","k"+str(k)))
         os.mkdir(os.path.join(os.getcwd(), data_root, "kfold","k"+str(k),"train"))
         os.mkdir(os.path.join(os.getcwd(), data_root, "kfold","k"+str(k),"valid"))
-        #    if not os.path.exists(os.getcwd()+"/db/kfold/"+"k_"+str(k)+"/input/"):
         os.mkdir(os.path.join(os.getcwd(), data_root, "kfold","k"+str(k),"train","input"))
         os.mkdir(os.path.join(os.getcwd(), data_root, "kfold","k"+str(k),"train","output"))
         os.mkdir(os.path.join(os.getcwd(), data_root, "kfold","k"+str(k),"valid","input"))
         os.mkdir(os.path.join(os.getcwd(), data_root, "kfold","k"+str(k),"valid","output"))
-        #os.mkdir(os.getcwd()+data_root+"/kfold/"+"k_"+str(k)+"/train/input/")
-        #os.mkdir(os.getcwd()+data_root+"/kfold/"+"k_"+str(k)+"/train/output/")
-        #    if not os.path.exists(os.getcwd()+"/db/kfold/"+"k_"+str(k)+"/output/"):
-        #os.mkdir(os.getcwd()+data_root+"/kfold/"+"k_"+str(k)+"/valid/input/")
-        #os.mkdir(os.getcwd()+data_root+"/kfold/"+"k_"+str(k)+"/valid/output/")
 
         for i in train_index:
-            #cv2.imwrite(os.getcwd()+data_root+"/kfold/"+"k_"+str(k)+"/train/input/"+str(i)+".png", img_example )
-            #cv2.imwrite(os.getcwd()+data_root+"/kfold/"+"k_"+str(k)+"/train/output/"+str(i)+".png", img_label )
             img_example = cv2.imread(pos_examples[i], 0)
             cv2.imwrite(os.path.join(os.getcwd(), data_root, "kfold","k"+str(k),"train","input",str(i)+".png"),img_example)
             img_label = cv2.imread(pos_labels[i], 0)
             cv2.imwrite(os.path.join(os.getcwd(), data_root, "kfold","k"+str(k),"train","output",str(i)+".png"),img_label)
         for i in test_index:
-            #cv2.imwrite(os.getcwd()+data_root+"/kfold/"+"k_"+str(k)+"/valid/input/"+str(i)+".png", img_example )
-            #cv2.imwrite(os.getcwd()+data_root+"/kfold/"+"k_"+str(k)+"/valid/output/"+str(i)+".png", img_label )
             img_example = cv2.imread(pos_examples[i], 0)
             cv2.imwrite(os.path.join(os.getcwd(), data_root, "kfold","k"+str(k),"valid","input",str(i)+".png"),img_example)
             img_label = cv2.imread(pos_labels[i], 0)
