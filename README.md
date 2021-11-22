@@ -18,7 +18,7 @@ pip install tensorflow-addons==0.10.0
 pip install opencv-python
 ```
 
-## TRAIN our u-net with our DATA
+## TRAIN u-net with our DATA
 The first step is to extract thumbnails of size 320*320 from the reliefMap. We made a bash/python script for that. Here is the command to extract the training pairs and distribute them in dbRelief/thumbnail/examples/ and dbRelief/thumbnail/labels/.
 ```
 ./train-valid_cut_All.sh dbRelief/ dbRelief/thumbnails/
