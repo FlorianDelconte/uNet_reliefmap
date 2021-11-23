@@ -1,5 +1,6 @@
 # uNet_reliefmap
 Train k-models with our reliefMap. 
+![alt text](data_script_explanation.png?raw=true "data scripts explanation")
 
 ## DATA
 In 'dbRelief' they are all reliefMap and labeled image for train u-net (suffixed by '_GT'). They are generated using this repository : https://github.com/FlorianDelconte/TLDDC.git
