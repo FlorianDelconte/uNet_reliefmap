@@ -14,10 +14,10 @@ sudo apt install python3-dev python3-pip python3-venv
 python3 -m venv --system-site-packages ./venv
 source ./venv/bin/activate
 pip install --upgrade pip
-pip install --upgrade tensorflow
-pip install tensorflow-addons
-pip install opencv-python
-pip install -U scikit-learn
+pip install --upgrade tensorflow==2.6
+pip install tensorflow-addons==0.14
+pip install opencv-python==4.5.3.56
+pip install -U scikit-learn==1.0.1
 ```
 
 ## TRAIN u-net with our DATA
