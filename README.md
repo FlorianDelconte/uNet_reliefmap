@@ -20,7 +20,7 @@ pip install -U scikit-learn
 ```
 
 ## TRAIN u-net with our DATA
-The first step is to extract thumbnails of size 320*320 from the reliefMap. We made a bash/python script for that. Here is the command to extract the training pairs and distribute them in dbRelief/thumbnail/examples/ and dbRelief/thumbnail/labels/.
+The first step is to extract thumbnails of size 320*320 from the reliefMap. We made a bash/python script for that. Here is the command to extract the training pairs and distribute them in dbRelief/thumbnail/examples/ and dbRelief/thumbnail/labels/. . Warning : You have to respect the folder naming because they are hardcoded in "kfold_split.py" and "train_kfold.py".
 ```
 ./train-valid_cut_All.sh dbRelief/ dbRelief/thumbnails/
 ```
