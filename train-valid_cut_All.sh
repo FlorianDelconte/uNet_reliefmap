@@ -3,9 +3,10 @@ echo "Total Arguments:" $#
 inputDirectory=$1
 outputDirectoryName=$2
 
-#create valid and training dirs.
+#create examples and labels dirs.
 echo "CREATE TREE DIRECTORY FOR DEEP..."
-
+mkdir $outputDirectoryName/exemples
+mkdir $outputDirectoryName/labels
 echo "LOOP ON INPUT DIRECTORY FILES AND CUT/FILL DEEP-DIRECTORY..."
 #loop on the relief map to cut
 for fileGT in $inputDirectory*_GT*

@@ -1,5 +1,5 @@
 # uNet_reliefmap
-Train a u-net with Reliefmap
+Train k-models with our reliefMap. 
 
 ## DATA
 In 'dbRelief' they are all reliefMap and labeled image for train u-net (suffixed by '_GT'). They are generated using this repository : https://github.com/FlorianDelconte/TLDDC.git
@@ -13,9 +13,10 @@ sudo apt install python3-dev python3-pip python3-venv
 python3 -m venv --system-site-packages ./venv
 source ./venv/bin/activate
 pip install --upgrade pip
-pip install --upgrade tensorflow==2.2.0
-pip install tensorflow-addons==0.10.0
+pip install --upgrade tensorflow
+pip install tensorflow-addons
 pip install opencv-python
+pip install -U scikit-learn
 ```
 
 ## TRAIN u-net with our DATA

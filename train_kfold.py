@@ -64,13 +64,6 @@ for k in range(len(kfolder)):
     valid_dir       = os.path.join(os.getcwd(), "dbRelief/thumbnails/","kfold",kfolder[k], 'valid')
     steps_per_epoch=(math.ceil((len([name for name in os.listdir(train_dir+"/input") if os.path.join(train_dir+"/input", name)]))/batch_size))*3
     validation_steps=(math.ceil((len([name for name in os.listdir(valid_dir+"/input") if os.path.join(valid_dir+"/input", name)]))/batch_size))*3
-
-    print("######################################################################################")
-    print("######################################################################################")
-    print(train_dir)
-    print(valid_dir)
-    print("######################################################################################")
-    print("######################################################################################")
     # Create network
     __generators    = data.trainset_generator(model.batch_size, train_dir, input_folder, label_folder,
                                      data_gen_args, save_to_dir=None)#"../crossValidationv3/data4_1st/visu_augmented_data"
@@ -93,7 +86,12 @@ for k in range(len(kfolder)):
     except IOError:
         pass
 
-
+    
+    print("######################################################################################")
+    print(modelname)
+    print(train_dir)
+    print(valid_dir)
+    print("######################################################################################")
     history=net.fit(__generators,
             steps_per_epoch   = steps_per_epoch,
             validation_data   = __validator,

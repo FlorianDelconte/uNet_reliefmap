@@ -22,27 +22,56 @@ h=img.shape[0]
 hToPredict=img.shape[0]
 w=img.shape[1]
 wToPredict=img.shape[1]
+GRID_SIZE=320
+shift=GRID_SIZE//2
+#dUnlarge image
+unlargedImg =  np.zeros([h+GRID_SIZE*2,w+GRID_SIZE*2],np.uint8)
+unlargedImg[GRID_SIZE:h+GRID_SIZE,GRID_SIZE:w+GRID_SIZE]=img
+#SPLIT INTO TILES
+tiles = []
+y=0
+x=0
+while y <= unlargedImg.shape[0] - GRID_SIZE :
+    while x <= unlargedImg.shape[1] - GRID_SIZE :
+        roi = unlargedImg[y:y + GRID_SIZE ,x:x + GRID_SIZE]
+        tiles.append(roi)
+        x+=shift
+    y+=shift
+    x=0
+#PREDICT ON TILES
+tilesResult = []
+for e in tiles:
+    #NORMALIZE
+    e = e / 255
+    #SHAPE FOR TENSOR
+    e = np.reshape(e,e.shape+(1,))
+    e = np.reshape(e,(1,)+e.shape)
+    px 	= net.predict(e, verbose=1)
+    px = px[0,:,:,0]
+    tilesResult.append(px)
+#CONCAT TILES
+concatenedResult = np.zeros((unlargedImg.shape[0], unlargedImg.shape[1]), dtype = "float64")
+#tiles id
+i=0
+y=0
+x=0
+while i < len(tilesResult):
+    concatenedResult[y:y + shift,x:x + shift]=tilesResult[i][shift//2:shift+shift//2,shift//2:shift+shift//2]
+    i+=1
+    x+=shift
+    if(x>=unlargedImg.shape[1] - GRID_SIZE + 1 ):
+        x=0
+        y+=shift
 
-#NORMALIZE
-if h%model.numFilt != 0 or w%model.numFilt != 0:
-    hToPredict = model.numFilt * round(img.shape[0] / model.numFilt)
-    wToPredict = model.numFilt * round(img.shape[1] / model.numFilt)
-    img = cv2.resize(img, (wToPredict,hToPredict), interpolation =cv2.INTER_AREA)
-img = img / 255
-img = np.reshape(img,img.shape+(1,))
-img = np.reshape(img,(1,)+img.shape)
-#    #PREDICTION
-px 	= net.predict(img, verbose=1)
-    #EXTRACT PROBABILITY
-px	= px[0,:,:,0]
-px=(px*255).astype(np.uint8)
-if h!=hToPredict or w!=wToPredict :
-    px = cv2.resize(px, (w,h), interpolation =cv2.INTER_AREA)
-px=cv2.flip(px, 0)
-cv2.imwrite(filename+'SEG.pgm', px )
+concatenedResult=(concatenedResult*255).astype(np.uint8)
+#EXTRACT prediction from concat tile result
+pred=concatenedResult[GRID_SIZE-(shift//2):h+GRID_SIZE-(shift//2),GRID_SIZE-(shift//2):w+GRID_SIZE-(shift//2)]
+pred=cv2.flip(pred, 0)
 #TRESHOLD
-_,px_thresh = cv2.threshold(px,127,255,cv2.THRESH_BINARY)
-#WRITE
+_,px_thresh = cv2.threshold(pred,127,255,cv2.THRESH_BINARY)
+#WRITE IN PNG FOR IPOL DISPLAY
+cv2.imwrite('outputSEGTRESH.png', px_thresh )
+cv2.imwrite('outputSEG.png', pred )
+#WRITE IN PGM TO CALL "Main_segToMesh.cpp"
 cv2.imwrite(filename+'SEGTRESH.pgm', px_thresh )
-
-    
+print("PREDICTION FINISH")
